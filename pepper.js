@@ -1,5 +1,8 @@
 $(function(){
-    window.defineComponent = defineComponent;
+    window.Pepper = {
+        defineComponent: defineComponent,
+        update: update
+    }
 
     function defineComponent(component_name,options){
         var opt = {};$.each(options,function(key,value){opt[key] = value;});
@@ -16,6 +19,7 @@ $(function(){
             fakeAsync_GetStyle(opt,function(css){
                 var style = css ? $('<style>').html(css) : '';
                 var dom = getTemplate(opt);
+                $(dom).data('pepper_opt',opt);
 
                 var component = $(style).add(dom);
                 component = wrapComponent(component,opt);
@@ -32,6 +36,7 @@ $(function(){
         return $(components);
     }
 
+    //like asynchronous, but really synchronous
     function fakeAsync_GetStyle(opt,callback){
         var lessStr = '#${component_id}{' + opt.less + '}';
         lessStr = strCompile(lessStr,opt);
@@ -43,13 +48,29 @@ $(function(){
     function getTemplate(opt){
         var template = strCompile(opt.template,opt);
 
-        //数据模板解析 ${} 解析成
-        template = template.replace(/\$\{([^\}]*)?\}/g,function(str,data_key,start){
-            return getData(opt.data, data_key.trim()) || '';
-        });
+        template = render(template,opt.data);
 
         var dom = $(template).attr('id',opt.component_id);
         return dom;
+    }
+
+    function update(this_dom, updated_data){
+        var opt = $(this_dom).data('pepper_opt');
+
+        var new_date = opt.data || {};
+        $.each(updated_data,function(key,value){new_date[key]=value;});
+
+        var old_html = $(this_dom).html();
+        var new_html = render( opt.template||old_html , new_date );
+        old_html !== new_html && $(this_dom).html(new_html);
+    }
+
+    function render(template, data){
+        //replace ${key} with the subdata of data[key]
+        template = template.replace(/\$\{([^\}]*)?\}/g,function(str,data_key,start){
+            return getData(data, data_key.trim());
+        });
+        return template;
     }
 
     function getData(data, data_key){
@@ -58,8 +79,11 @@ $(function(){
             case 'function':
                 res = res();
                 break;
-            default:
-                res = res ? res : ''
+            case 'undefined':
+            case 'NaN':
+            case 'null':
+                res = '';
+                break;
         }
         return res;
     }
