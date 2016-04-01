@@ -9,7 +9,7 @@ $(function(){
         */}),
         template: multiline(function(){/*
             <div>
-                <a class="close" href="javascript:;">移除</a>
+                <a class="close" href="javascript:;">Remove</a>
                 <h1> ${title} </h1>
                 <p> ${content} </p>
             </div>
@@ -35,7 +35,7 @@ $(function(){
         */}),
         template: multiline(function(){/*
             <div>
-                快拽我快拽我
+                Drag me please!
             </div>
         */}),
         main: function(){
