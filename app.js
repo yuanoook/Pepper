@@ -31,15 +31,15 @@ $(function(){
 
     Pepper.defineComponent('DragElement',{
         less: multiline(function(){/*
-            padding:10px;margin:30px;box-shadow:0 0 10px rgba(0,0,0,.3);position:relative;background:#fff url(pepper.jpg) center no-repeat;background-size:100%;
+            padding:10px;margin:30px;box-shadow:0 0 10px rgba(0,0,0,.3);position:relative;background:#fff url(chili-pepper.jpg) center no-repeat;background-size:100%;
             user-select: none;-webkit-user-select: none;width:250px;
             &.mousedown{cursor:move;}
-            a{float:right;}
+            a{float:right;text-shadow:0 0 10px #fff;}
         */}),
         template: multiline(function(){/*
             <div>
-                <a class="close" href="javascript:;">Remove</a>
                 <h2>Drag me please!</h2>
+                <a class="close" href="javascript:;">Remove</a>
                 <p>
                     Top: <span>${top}px</span> Left: <span>${left}px</span>
                 </p>
