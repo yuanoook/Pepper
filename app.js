@@ -2,7 +2,7 @@ $(function(){
     var count = 0;
     Pepper.defineComponent('Pepper',{
         less: multiline(function(){/*
-            padding:10px;margin:30px;box-shadow:0 0 10px rgba(0,0,0,.3);background:url(http://cdn.rawgit.com/yuanoook/Pepper/master/pepper.jpg) center no-repeat;background-size:100%;
+            padding:10px;margin:30px;box-shadow:0 0 10px rgba(0,0,0,.3);background:url(//cdn.rawgit.com/yuanoook/Pepper/master/pepper.jpg) center no-repeat;background-size:100%;
             .close{float:right;}
             h1{color:#555;}
             p{font-weight:bold;}
@@ -31,7 +31,7 @@ $(function(){
 
     Pepper.defineComponent('DragElement',{
         less: multiline(function(){/*
-            padding:10px;margin:30px;box-shadow:0 0 10px rgba(0,0,0,.3);position:relative;background:#fff url(http://cdn.rawgit.com/yuanoook/Pepper/master/chili-pepper.jpg) center no-repeat;background-size:100%;
+            padding:10px;margin:30px;box-shadow:0 0 10px rgba(0,0,0,.3);position:relative;background:#fff url(//cdn.rawgit.com/yuanoook/Pepper/master/chili-pepper.jpg) center no-repeat;background-size:100%;
             user-select: none;-webkit-user-select: none;width:250px;
             &.mousedown{cursor:move;}
             a{float:right;text-shadow:0 0 10px #fff;}
